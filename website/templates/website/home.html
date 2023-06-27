@@ -11,7 +11,6 @@
 
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
@@ -20,14 +19,14 @@
                         <th scope="col">State</th>
                         <th scope="col">Zipcode</th>
                         <th scope="col">Created at</th>
+                        <th scope="col">ID</th>
                     </tr>
                 </thead>
         
                 <tbody class="table-group-divider">
                     {% for record in records %}
                     <tr>
-                        <td><a href="{% url 'website:record' record.id%}">{{ record.id }}</a></td>
-                        <td>{{ record.first_name }} {{ record.last_name }}</td>
+                        <td><a href="{% url 'website:record' record.id%}" class="link-secondary">{{ record.first_name }} {{ record.last_name }}</a></td>
                         <td>{{ record.email }}</td>
                         <td>{{ record.phone }}</td>
                         <td>{{ record.address }}</td>
@@ -35,6 +34,7 @@
                         <td>{{ record.state }}</td>
                         <td>{{ record.zipcode }}</td>
                         <td>{{ record.created_at }}</td>
+                        <td><a href="{% url 'website:record' record.id%}" class="link-secondary">{{ record.id }}</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

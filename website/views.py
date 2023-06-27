@@ -100,3 +100,21 @@ def add_record(request):
     else:
         messages.success(request, "You need to be logged in to add record")
         return redirect("website:home")
+
+def update_record(request, pk):
+    if request.user.is_authenticated:
+        current_record = Record.objects.get(id=pk)
+        form = AddRecordForm(request.POST or None, instance=current_record)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Record haas been updated")
+            return redirect("website:home")
+        
+        return render(request, "website/update_record.html", {
+            "form": form,
+        })
+
+    else:
+        messages.success(request, "You need to be logged in to add record")
+        return redirect("website:home")
