@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .forms import SignupForm
+from .forms import SignupForm, AddRecordForm
 from .models import Record
 
 # Create your views here.
@@ -70,4 +70,33 @@ def customer_record(request, pk):
     
     else:
         messages.success(request, "You must be logged in to see that page...")
+        return redirect("website:home")
+    
+def delete_record(request, pk):
+    if request.user.is_authenticated:
+        record = Record.objects.get(id=pk)
+        record.delete()
+        messages.success(request, "Record deleted successfully.")
+        return redirect("website:home")
+    else:
+        messages.success(request, "You need to login to do this.")
+        return redirect("website:home")
+    
+def add_record(request):
+
+    form = AddRecordForm(request.POST or None)
+
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if form.is_valid():
+                add_record = form.save()
+                messages.success(request, "Record added.")
+                return redirect("website:home")
+            
+        return render(request, "website/add_record.html", {
+            "form": form,
+        })
+    
+    else:
+        messages.success(request, "You need to be logged in to add record")
         return redirect("website:home")

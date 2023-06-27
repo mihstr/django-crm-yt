@@ -1,27 +1,30 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark mb-5">
+<nav class="navbar d-flex flex-row sticky-top navbar-expand-lg navbar-dark bg-dark mb-5">
 
-    <div class="container-fluid">
-        <a class="navbar-brand mx-3" href="{% url 'website:home' %}">Django CRM</a>
+    <div>
+        <a class="navbar-brand mx-4" href="{% url 'website:home' %}">Django CRM</a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
     
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse d-flex flex-row justify-content-end gap" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0">
 
             {% if user.is_authenticated %}
-                <li class="nav-item mx-3">
-                    <a class="nav-link" href="{% url 'website:logout' %}">Logout</a>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="{% url 'website:add_record' %}">Add Record</a>
+                </li>
+                <li class="nav-item me-4">
+                    <a class="nav-link"  href="{% url 'website:logout' %}">Logout</a>
                 </li>
             {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'website:home' %}">Login</a>
+                <li class="nav-item me-3">
+                    <a class="nav-link border rounded px-3 py-2" href="{% url 'website:home' %}">Login</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'website:register' %}">Register</a>
+                <li class="nav-item me-4">
+                    <a class="nav-link border rounded px-3 py-2" href="{% url 'website:register' %}">Register</a>
                 </li>
             {% endif %}
 
